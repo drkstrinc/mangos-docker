@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+   db:
+     image: ssorriaux/mangosone-database-mysql:latest
+     volumes:
+       - /share/Container/mangos/tbc/database:/var/lib/mysql
+     ports:
+       - "1501:3306"
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: mangos
+
+   realmd:
+     depends_on:
+       - db
+     image: ssorriaux/mangosone-realmd:latest
+     ports:
+       - "3724:3724"
+     restart: always
+     environment:
+       LOGIN_DATABASE_INFO: db;3306;root;mangos;realmd
+
+   server:
+     tty: true
+     stdin_open: true
+     depends_on:
+       - db
+       - realmd
+     image: ssorriaux/mangosone-server:latest
+     volumes:
+       - /share/Container/mangos/tbc/server/conf:/etc/mangos/conf
+       - /share/Container/mangos/tbc/server/maps:/etc/mangos/maps
+       - /share/Container/mangos/tbc/server/vmaps:/etc/mangos/vmaps
+       - /share/Container/mangos/tbc/server/mmaps:/etc/mangos/mmaps
+       - /share/Container/mangos/tbc/server/dbc:/etc/mangos/dbc
+     ports:
+       - "8085:8085"
+     restart: always
+     environment:
+       LOGIN_DATABASE_INFO: db;3306;root;mangos;realmd
+       WORLD_DATABASE_INFO: db;3306;root;mangos;mangos1
+       CHARACTER_DATABASE_INFO: db;3306;root;mangos;character1
+
+   cms:
+     depends_on:
+       - db
+     image: drkstrinc/wow-simple-reg:latest
+     ports:
+       - 1337:80
+     volumes:
+       - /share/Container/mangos/tbc/website:/var/www/html

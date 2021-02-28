@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+   db:
+     image: ssorriaux/mangostwo-database-mysql:latest
+     volumes:
+       - /share/Container/mangos/wotlk/database:/var/lib/mysql
+     ports:
+       - "1502:3306"
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: mangos
+
+   realmd:
+     depends_on:
+       - db
+     image: ssorriaux/mangostwo-realmd:latest
+     ports:
+       - "3724:3724"
+     restart: always
+     environment:
+       LOGIN_DATABASE_INFO: db;3306;root;mangos;realmd
+
+   server:
+     tty: true
+     stdin_open: true
+     depends_on:
+       - db
+       - realmd
+     image: ssorriaux/mangostwo-server:latest
+     volumes:
+       - /share/Container/mangos/wotlk/server/conf:/etc/mangos/conf
+       - /share/Container/mangos/wotlk/server/maps:/etc/mangos/maps
+       - /share/Container/mangos/wotlk/server/vmaps:/etc/mangos/vmaps
+       - /share/Container/mangos/wotlk/server/mmaps:/etc/mangos/mmaps
+       - /share/Container/mangos/wotlk/server/dbc:/etc/mangos/dbc
+     ports:
+       - "8085:8085"
+     restart: always
+     environment:
+       LOGIN_DATABASE_INFO: db;3306;root;mangos;realmd
+       WORLD_DATABASE_INFO: db;3306;root;mangos;mangos2
+       CHARACTER_DATABASE_INFO: db;3306;root;mangos;character2
+
+   cms:
+     depends_on:
+       - db
+     image: drkstrinc/wow-simple-reg:latest
+     ports:
+       - 1337:80
+     volumes:
+       - /share/Container/mangos/wotlk/website:/var/www/html
