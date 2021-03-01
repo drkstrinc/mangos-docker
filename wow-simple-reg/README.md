@@ -1,5 +1,5 @@
 # wow-simple-reg
-WoW Simple Registration Docker Image and Container based off of masterking32/WoWSimpleRegistration
+WoW Simple Registration Docker Image and Container based off of [masterking32/WoWSimpleRegistration](https://github.com/masterking32/WoWSimpleRegistration)
 
 ## Build WoW Simple Registration Image
 Run the following in the wow-simple-reg directory:

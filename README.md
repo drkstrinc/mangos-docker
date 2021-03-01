@@ -11,11 +11,13 @@ This repository lists everything needed to create and run Docker Images for the 
     * This is World of Warcraft Wrath of the Lich King (expansion: 2)
 
 ## Information
-We will be using StephenSorriaux/mangos-docker Images for **db**, **realmd**, and **server**. I have provided **build** and **cms** Dockerfiles to use to fill in the gaps.
+We will be using [StephenSorriaux/mangos-docker](https://github.com/StephenSorriaux/mangos-docker) Images for **db**, **realmd**, and **server**.
 
-**The only additional requirements are that you have a WoW Client for the Core you plan to build and create a Private Server for.**
+I have provided **build** and **cms** Dockerfiles to use to fill in the gaps.
 
-After following the steps in the README for a given Core, and using StephenSorriaux/mangos-docker Images, you should have 4 Containers for each **MaNGOS** Core:
+**The only additional requirements are that you have a WoW Client for the Core you plan to build**
+
+After following the steps in the README to build a given Core, and using [StephenSorriaux/mangos-docker](https://github.com/StephenSorriaux/mangos-docker) Images, you should have 4 Containers for each **MaNGOS** Core:
 
 * **db** - MySQL Database used by realmd, server, and cms
 * **realmd** - Realm/Auth Server
