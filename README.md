@@ -17,9 +17,9 @@ We will be using Stephen Sorriaux's Images for **db**, **realmd**, and **server*
 
 After following the steps in the README for a given Core, you should have 4 Containers for each **MaNGOS** Core:
 
-* db - Database used by realmd, server, and cms
-* realmd - Realm/Auth server
-* server - World Server
-* cms - WoW Simple Registration Website
+* **db** - MySQL Database used by realmd, server, and cms
+* **realmd** - Realm/Auth Server
+* **server** - World Server
+* **cms** - WoW Simple Registration Website
 
 **Please review the README's and docker-compose.yml's** *before using them* as they will likely need slight modifications before running.

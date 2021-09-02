@@ -21,6 +21,16 @@ docker run --rm \
     drkstrinc/mangosone-build:latest
 ```
 
+## Copy config files out of mangosone-realmd Image
+Run the following commands:
+
+```bash
+docker run --rm \
+    --entrypoint cat \
+    ssorriaux/mangosone-realmd:latest \
+    /etc/mangos/conf/realmd.conf > /share/Container/mangos/tbc/realm/conf/realmd.conf
+```
+
 ## Copy config files out of mangosone-server Image
 Run the following commands:
 
@@ -38,7 +48,7 @@ docker run --rm \
     /etc/mangos/conf/ahbot.conf.dist > /share/Container/mangos/tbc/server/conf/ahbot.conf.dist
 ```
 
-**Configure mangosd.conf and ahbot.conf.dist to your liking**
+**Configure realmd.conf, mangosd.conf, and ahbot.conf.dist to your liking**
 
 ## Utilize ssorriaux docker-compose.yml and run:
 Run the following command from this directory (mangosone):
